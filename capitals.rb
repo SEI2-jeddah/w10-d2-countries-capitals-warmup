@@ -1,102 +1,219 @@
-# an array of countries hashes
-countries =[
-  {
-    name: "Austria",
-    capital: "Vienna"
+$states =[
+{
+    name: "Alabama",
+    capital: "Montgomery"
 }, {
-    name: "Bahrain",
-    capital: "Manama"
+    name: "Alaska",
+    capital: "Juneau"
 }, {
-    name: "Belgium",
-    capital: "Brussels"
+    name: "Arizona",
+    capital: "Phoenix"
 }, {
-    name: "China",
-    capital: "Beijing"
+    name: "Arkansas",
+    capital: "Little Rock"
 }, {
-    name: "Egypt",
-    capital: "Cairo"
+    name: "California",
+    capital: "Sacramento"
 }, {
-    name: "England",
-    capital: "London"
+    name: "Colorado",
+    capital: "Denver"
 }, {
-    name: "France",
-    capital: "Paris"
+    name: "Connecticut",
+    capital: "Hartford"
 }, {
-    name: "Germany",
-    capital: "Berlin"
+    name: "Delaware",
+    capital: "Dover"
 }, {
-    name: "Hungary",
-    capital: "Budapest"
+    name: "Florida",
+    capital: "Tallahassee"
 }, {
-    name: "India",
-    capital: "New Delhi"
+    name: "Georgia",
+    capital: "Atlanta"
 }, {
-    name: "Indonesia",
-    capital: "Jakarta"
+    name: "Hawaii",
+    capital: "Honolulu"
 }, {
-    name: "Iraq",
-    capital: "Baghdad"
+    name: "Idaho",
+    capital: "Boise"
 }, {
-    name: "Italy",
-    capital: "Rome"
+    name: "Illinois",
+    capital: "Springfield"
 }, {
-    name: "Japan",
-    capital: "Tokyo"
+    name: "Indiana",
+    capital: "Indianapolis"
 }, {
-    name: "Jordan",
-    capital: "Amman"
+    name: "Iowa",
+    capital: "Des Moines"
 }, {
-    name: "Kuwait",
-    capital: "Kuwait"
+    name: "Kansas",
+    capital: "Topeka"
 }, {
-    name: "Lebanon",
-    capital: "Beirut"
+    name: "Kentucky",
+    capital: "Frankfort"
 }, {
-    name: "Malaysia",
-    capital: "Kuala Lumpur"
+    name: "Louisiana",
+    capital: "Baton Rouge"
 }, {
-    name: "Mexico",
-    capital: "Mexico"
+    name: "Maine",
+    capital: "Augusta"
 }, {
-    name: "Netherlands",
-    capital: "Amsterdam"
+    name: "Maryland",
+    capital: "Annapolis"
 }, {
-    name: "Oman",
-    capital: "Muscat"
+    name: "Massachusetts",
+    capital: "Boston"
 }, {
-    name: "Pakistan",
-    capital: "Islamabad"
+    name: "Michigan",
+    capital: "Lansing"
 }, {
-    name: "Panama",
-    capital: "Panama"
+    name: "Minnesota",
+    capital: "St. Paul"
 }, {
-    name: "Qatar",
-    capital: "Doha"
+    name: "Mississippi",
+    capital: "Jackson"
 }, {
-    name: "Russia",
-    capital: "Moscow"
+    name: "Missouri",
+    capital: "Jefferson City"
 }, {
-    name: "Saudi Arabia",
-    capital: "Riyadh"
+    name: "Montana",
+    capital: "Helena"
 }, {
-    name: "Spain",
-    capital: "Madrid"
+    name: "Nebraska",
+    capital: "Lincoln"
 }, {
-    name: "Sri Lanka",
-    capital: "Colombo"
+    name: "Nevada",
+    capital: "Carson City"
 }, {
-    name: "Switzerland",
-    capital: "Bern"
+    name: "New Hampshire",
+    capital: "Concord"
 }, {
-    name: "Tunisia",
-    capital: "Tunis"
+    name: "New Jersey",
+    capital: "Trenton"
 }, {
-    name: "United Arab Emirates",
-    capital: "Abu Dhabi"
+    name: "New Mexico",
+    capital: "Santa Fe"
 }, {
-    name: "United Kingdom",
-    capital: "London"
+    name: "New York",
+    capital: "Albany"
 }, {
-    name: "United States",
-    capital: "Washington D.C."
+    name: "North Carolina",
+    capital: "Raleigh"
+}, {
+    name: "North Dakota",
+    capital: "Bismarck"
+}, {
+    name: "Ohio",
+    capital: "Columbus"
+}, {
+    name: "Oklahoma",
+    capital: "Oklahoma City"
+}, {
+    name: "Oregon",
+    capital: "Salem"
+}, {
+    name: "Pennsylvania",
+    capital: "Harrisburg"
+}, {
+    name: "Rhode Island",
+    capital: "Providence"
+}, {
+    name: "South Carolina",
+    capital: "Columbia"
+}, {
+    name: "South Dakota",
+    capital: "Pierre"
+}, {
+    name: "Tennessee",
+    capital: "Nashville"
+}, {
+    name: "Texas",
+    capital: "Austin"
+}, {
+    name: "Utah",
+    capital: "Salt Lake City"
+}, {
+    name: "Vermont",
+    capital: "Montpelier"
+}, {
+    name: "Virginia",
+    capital: "Richmond"
+}, {
+    name: "Washington",
+    capital: "Olympia"
+}, {
+    name: "West Virginia",
+    capital: "Charleston"
+}, {
+    name: "Wisconsin",
+    capital: "Madison"
+}, {
+    name: "Wyoming",
+    capital: "Cheyenne"
 }]
+
+$total_score = 0
+$total_guesses = 0
+def iterate_states(states_array)
+    $states.shuffle!
+    puts "let's play"
+    puts "You will be given the name of the state. Type the name of the capital and press enter"
+    states_array.each_with_index do |state, i|
+        puts "What is the capital of " + state[:name] + "?"
+        state_input = gets.chomp
+        if state_input.downcase == state[:capital].downcase
+            $total_score = $total_score + 1
+            $total_guesses = $total_guesses + 1
+            if !$states[i][:correct]
+                $states[i][:correct] = 1
+                $states[i][:guessed] = 1
+            else
+                $states[i][:correct] = $states[i][:correct] + 1
+                $states[i][:guessed] = $states[i][:guessed] + 1
+            end
+            puts "     Right! Your total game score is #{$total_score} for #{$total_guesses}"
+            puts "     Your score for this state is #{$states[i][:correct]} for #{$states[i][:guessed]}"
+
+            else
+                $total_guesses = $total_guesses + 1
+                if !$states[i][:correct]
+                    $states[i][:correct] = 0
+                    $states[i][:guessed] = 1
+
+                else
+                    $states[i][:guessed] = $states[i][:guessed] + 1
+                end
+                puts "     Wrong! Correct answer is #{$states[i][:capital]} Your total game score is #{$total_score} for #{$total_guesses}"
+                puts  "    Your score for this state is #{$states[i][:correct]} for #{$states[i][:guessed]}"
+            end
+        end
+        puts "Game Over. Do you want to play again?"
+        input = gets.chomp
+        if input == "yes"
+            iterate_states($states)
+        else
+            puts "okay next time"
+        end
+    end
+
+
+def start_game
+    puts 'Welcome to the state capitial memorization game. Do you want to play?'
+    input = gets.chomp
+    if input == "yes"
+        iterate_states($states)
+
+        else
+            puts "okay next time"
+        end
+end
+
+start_game()
+
+
+puts 'Welcome to the state capitial memorization game. Do you want to play?'
+input = gets.chomp
+if input == "yes"
+    start_game(states)
+else
+    puts "okay next time"
+end
